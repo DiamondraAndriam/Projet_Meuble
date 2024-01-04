@@ -27,6 +27,10 @@ public class Categorie {
     public Categorie(){
     }
 
+    public Categorie(String idCategorie) {
+        this.setId(Integer.parseInt(idCategorie));
+    }
+
     public int getId() {
         return id;
     }
@@ -66,7 +70,7 @@ public class Categorie {
         }
     }
     
-    public List<Categorie> findAll(Connection c) throws Exception{
+    public static List<Categorie> findAll(Connection c) throws Exception{
         boolean newConnection = false;
         PreparedStatement statement = null;
         ResultSet rs = null;

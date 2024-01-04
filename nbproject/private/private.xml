@@ -2,6 +2,22 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/web/formule/recherche.jsp</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/model/FormuleQuantite.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/controller/insert/AjoutMeubleServlet.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/controller/formule/RechercherFormuleServlet.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/model/Taille.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/controller/insert/InsertCategorieServlet.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/web/formule/formuleFabrication.jsp</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/model/Materiau.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/controller/formule/RechercherServlet.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/web/insertion/insertionCategorie.jsp</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/controller/formule/AjoutFormuleServlet.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/controller/insert/InsertMeubleServlet.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/src/java/model/Meuble.java</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/web/formule/formuleDetail.jsp</file>
+            <file>file:/D:/Fianarana/Semestre5/baovola/Projet_Meuble/web/insertion/ajoutMeuble.jsp</file>
+        </group>
     </open-files>
 </project-private>

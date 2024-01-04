@@ -25,6 +25,10 @@ public class Materiau {
 
     public Materiau() {}
 
+    public Materiau(String idMateriau) {
+        setId(Integer.parseInt(idMateriau));
+    }
+
     public int getId() {
         return id;
     }
@@ -98,7 +102,7 @@ public class Materiau {
         }
     }
     
-    public static List<FormuleQuantite> findMeuble(Connection c) throws Exception {
+    public List<FormuleQuantite> findMeuble(Connection c) throws Exception {
         boolean newConnection = false;
         PreparedStatement statement = null;
         ResultSet rs = null;
@@ -107,12 +111,17 @@ public class Materiau {
                 c = util.Util.pgConnect();
                 newConnection = true;
             }
-            statement = c.prepareStatement("select * from v_fab_meuble_materiau");
+            statement = c.prepareStatement("select * from v_fab_meuble_materiau where id_materiau = ?");
+            statement.setInt(1, this.getId());
             rs = statement.executeQuery();
             List<FormuleQuantite> li = new ArrayList<>();
             while(rs.next()) {
                 FormuleQuantite formuleQuantite = new FormuleQuantite();
-                
+                Meuble meuble = new Meuble(rs.getInt("id_meuble"));
+                meuble.setNom(rs.getString("nom_taille")+" "+ rs.getString("nom_categorie")+" "+ rs.getString("nom_style"));
+                formuleQuantite.setMeuble(meuble);
+                formuleQuantite.setMateriau(this);
+                formuleQuantite.setQuantite(rs.getInt("quantite"));
                 li.add(formuleQuantite);
             }
             return li;
@@ -130,5 +139,5 @@ public class Materiau {
             }
         }
     }
-    
+
 }

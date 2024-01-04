@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.formule;
+package controller.insert;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,15 +15,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FormuleQuantite;
-import model.Materiau;
+import model.Categorie;
+import model.Style;
+import model.Taille;
 
 /**
  *
  * @author HERINIAINA
  */
-@WebServlet(name = "RechercherFormuleServlet", urlPatterns = {"/RechercherFormule"})
-public class RechercherFormuleServlet extends HttpServlet {
+@WebServlet(name = "AjoutMeubleServlet", urlPatterns = {"/AjoutMeuble"})
+public class AjoutMeubleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,14 +38,16 @@ public class RechercherFormuleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String idMateriau = request.getParameter("materiau");
-            Materiau materiau = new Materiau(idMateriau);
-            List<FormuleQuantite> formules = materiau.findMeuble(null);
-            request.setAttribute("liste", formules);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/resultat.jsp");
-            dispat.forward(request, response);
+            List<Categorie> categories = Categorie.findAll(null);
+            List<Style> styles = Style.findAll(null);
+            List<Taille> tailles = Taille.findAll(null);
+            request.setAttribute("categories", categories);
+            request.setAttribute("styles", styles);
+            request.setAttribute("tailles", tailles);
+            RequestDispatcher dispatch = request.getRequestDispatcher("insertion/ajoutMeuble.jsp");
+            dispatch.forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(RechercherFormuleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AjoutMeubleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

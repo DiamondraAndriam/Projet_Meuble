@@ -22,6 +22,15 @@ public class Meuble {
     private Taille taille;
     private Categorie categorie;
     private List<Materiau> liste;
+    private List<FormuleQuantite> formules;
+
+    public Meuble(String idMeuble) {
+        setId(Integer.parseInt(idMeuble));
+    }
+    
+    public Meuble(int id){
+        setId(id);
+    }
 
     public int getId() {
         return id;
@@ -70,6 +79,25 @@ public class Meuble {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+
+    public List<FormuleQuantite> getFormules() {
+        return formules;
+    }
+
+    public void setFormules(List<FormuleQuantite> formules) {
+        this.formules = formules;
+    }
+    
+    public Meuble(){}
+    
+    public Meuble(String idCategorie, String idTaille, String idStyle){
+        Categorie cat = new Categorie(idCategorie);
+        Taille taille = new Taille(idTaille);
+        Style style = new Style(idStyle);
+        setCategorie(cat);
+        setTaille(taille);
+        setStyle(style);
+    }
     
     public static List<Meuble> findAll(Connection c) throws Exception{
         boolean newConnection = false;
@@ -80,14 +108,14 @@ public class Meuble {
                 c = util.Util.pgConnect();
                 newConnection = true;
             }
-            statement = c.prepareStatement("select * from Meuble");
+            statement = c.prepareStatement("select * from v_meuble");
             rs = statement.executeQuery();
             List<Meuble> li = new ArrayList<>();
             while(rs.next()) {
                 Meuble meuble = new Meuble();
                 meuble.setId(rs.getInt("id_meuble"));
                 meuble.setStyle(new Style(rs.getInt("id_style")));
-                meuble.setNom(rs.getString("nom_Meuble"));
+                meuble.setNom(rs.getString("nom_taille")+" "+rs.getString("nom_categorie")+" "+rs.getString("nom_style"));
                 li.add(meuble);
             }
             return li;
@@ -140,7 +168,7 @@ public class Meuble {
                 connection = Util.pgConnect();
                 newConnection = true;
             }
-            statement = connection.prepareStatement("Select * from v_meuble where id = ?");
+            statement = connection.prepareStatement("Select * from v_meuble where id_meuble = ?");
             statement.setInt(1, this.getId());
             result= statement.executeQuery();
             while(result.next()){
@@ -154,7 +182,7 @@ public class Meuble {
             }
         } catch(Exception e){
             e.printStackTrace();
-            throw new Exception("Erreur de sélection: ne peut pas trouver le [model] avec cet id");
+            throw new Exception("Erreur de sélection: ne peut pas trouver le Meuble avec cet id");
         } finally{
             if(result != null){
                 result.close();
@@ -172,4 +200,20 @@ public class Meuble {
         setNom(this.getTaille().getNom() + " " + this.getCategorie().getNom()+ " " + this.getStyle().getNom());
     }
 
+    public void saveFormule(Connection connection) throws Exception {
+        boolean newConnection = false;
+        try{
+            if(connection == null){
+                connection = Util.pgConnect();
+                newConnection = true;
+            }
+            for (FormuleQuantite formule : formules) {
+                formule.save(connection);
+            }
+        } finally{
+            if(connection != null && newConnection == true){
+                connection.close();
+            }
+        } 
+    }
 }

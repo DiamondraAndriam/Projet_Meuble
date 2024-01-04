@@ -25,6 +25,10 @@ public class Taille {
     }
 
     public Taille(){}
+
+    Taille(String idTaille) {
+        this.setId(Integer.parseInt(idTaille));
+    }
     
     public int getId() {
         return id;
@@ -65,7 +69,7 @@ public class Taille {
         }    
     }
     
-    public List<Taille> findAll(Connection c) throws Exception{
+    public static List<Taille> findAll(Connection c) throws Exception{
         boolean newConnection = false;
         PreparedStatement statement = null;
         ResultSet rs = null;

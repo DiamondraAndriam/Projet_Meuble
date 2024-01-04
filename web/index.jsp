@@ -18,11 +18,13 @@
         <p><a href="insertion/insertionCategorie.jsp">Insérer Categorie</a></p>
         <p><a href="insertion/insertionStyle.jsp">Insérer Style</a></p>
         <p><a href="insertion/insertionTaille.jsp">Insérer Taille</a></p>
-        <p><a href="insertion/ajoutMeuble.jsp">Insérer Meuble</a></p>
-        <p><a href="insertion/insertionMeublejsp">Insérer Meuble</a></p>
-        <p><a href="formule/formuleFabrication">Insérer formule de meuble</a></p>
+        <p><a href="AjoutMeuble">Insérer Meuble</a></p>
+        <p><a href="MeubleFormule">Insérer formule de meuble</a></p>
+        <br>
         <p><a href="SetStyleMateriaux">Ajouter Matériau pour Style</a></p>
         <p><a href="DetailsStyle">Materiau pour un style</a></p>
-        <p><a href="RechercherFormule">Rechercher Style par matériau</a></p>
+        <br>
+        
+        <p><a href="Rechercher">Rechercher Meuble par matériau</a></p>
     </body> 
 </html>

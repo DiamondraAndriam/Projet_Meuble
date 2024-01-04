@@ -13,8 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import model.Materiau;
+import javax.servlet.http.HttpServletResponse; 
 import model.Style;
 
 /**
@@ -44,7 +43,6 @@ public class DetailsStyleServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(DetailsStyleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

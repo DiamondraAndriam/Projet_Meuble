@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Insertion catégorie</h1>
-        <form method="<%=request.getContextPath()%>/InsertCategorie" action="post">
+        <form method="post" action="<%=request.getContextPath()%>/InsertCategorie">
             <div>
                 <label>Nom</label>
                 <input type="text" name="categorie">

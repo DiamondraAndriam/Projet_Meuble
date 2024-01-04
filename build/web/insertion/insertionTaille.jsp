@@ -13,10 +13,10 @@
     </head>
     <body>
         <h1>Insertion taille</h1>
-        <form method="<%=request.getContextPath()%>/InsertTaille" action="post">
+        <form method="post" action="<%=request.getContextPath()%>/InsertTaille">
             <div>
                 <label>Nom</label>
-                <input type="text" name="categorie">
+                <input type="text" name="nom">
             </div>
             <input type="submit" value="OK">
         </form>

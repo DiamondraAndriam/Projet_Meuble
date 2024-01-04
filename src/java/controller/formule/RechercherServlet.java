@@ -6,25 +6,21 @@
 package controller.formule;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FormuleQuantite;
 import model.Materiau;
 
 /**
  *
  * @author HERINIAINA
  */
-@WebServlet(name = "RechercherFormuleServlet", urlPatterns = {"/RechercherFormule"})
-public class RechercherFormuleServlet extends HttpServlet {
+@WebServlet(name = "RechercherServlet", urlPatterns = {"/Rechercher"})
+public class RechercherServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,15 +33,14 @@ public class RechercherFormuleServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String idMateriau = request.getParameter("materiau");
-            Materiau materiau = new Materiau(idMateriau);
-            List<FormuleQuantite> formules = materiau.findMeuble(null);
-            request.setAttribute("liste", formules);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/resultat.jsp");
+        response.setContentType("text/html;charset=UTF-8");
+        try{
+            List<Materiau> liste = Materiau.findAll(null);
+            request.setAttribute("materiau", liste);
+            RequestDispatcher dispat = request.getRequestDispatcher("formule/recherche.jsp");
             dispat.forward(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(RechercherFormuleServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch(Exception e){
+            e.printStackTrace(response.getWriter());
         }
     }
 

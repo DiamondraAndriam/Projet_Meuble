@@ -6,7 +6,7 @@
 <%@page import="model.Meuble"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Materiau"%>
-<% List<Materiau> liste = (List<Materiau>) request.getAttribute("liste");%>
+<% List<Materiau> liste = (List<Materiau>) request.getAttribute("materiaux");%>
 <% Meuble meuble = (Meuble) request.getAttribute("meuble");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,16 +17,15 @@
     </head>
     <body>
         <h1>Détails formule</h1>
-        <form method="" action="post">
+        <form method="post" action="<%=request.getContextPath()%>/InsertFormule">
+            <input type="hidden" value="<% out.print(meuble.getId());%>" name="id_meuble">
             <p>Meuble :<%out.print(meuble.getNom());%></p>
+            <% for(Materiau mat : liste){ %>
             <div>
-                <label>Qté matériau 1</label>
-                <input type="number" name="">
+                <label>Quantité de <% out.print(mat.getNom()); %></label>
+                <input type="number" name=<%out.print(mat.getId());%>>
             </div>
-            <div>
-                <label>Qté matériau 1</label>
-                <input type="number" name="">
-            </div>
+            <% } %>
             <input type="submit" value="OK">
         </form>
     </body>

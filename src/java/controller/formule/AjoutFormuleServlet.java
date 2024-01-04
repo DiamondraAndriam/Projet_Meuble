@@ -6,7 +6,6 @@
 package controller.formule;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,15 +15,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FormuleQuantite;
 import model.Materiau;
+import model.Meuble;
 
 /**
  *
  * @author HERINIAINA
  */
-@WebServlet(name = "RechercherFormuleServlet", urlPatterns = {"/RechercherFormule"})
-public class RechercherFormuleServlet extends HttpServlet {
+@WebServlet(name = "AjoutFormuleServlet", urlPatterns = {"/AjoutFormule"})
+public class AjoutFormuleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,14 +37,17 @@ public class RechercherFormuleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String idMateriau = request.getParameter("materiau");
-            Materiau materiau = new Materiau(idMateriau);
-            List<FormuleQuantite> formules = materiau.findMeuble(null);
-            request.setAttribute("liste", formules);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/resultat.jsp");
+            String idMeuble = request.getParameter("meuble");
+            Meuble meuble = new Meuble(idMeuble);
+            meuble.findById(null);
+            List<Materiau> materiaux = meuble.getStyle().selectMateriau(null);
+            request.setAttribute("meuble",meuble);
+            request.setAttribute("materiaux",materiaux);
+            
+            RequestDispatcher dispat = request.getRequestDispatcher("formule/formuleDetail.jsp");
             dispat.forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(RechercherFormuleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AjoutFormuleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

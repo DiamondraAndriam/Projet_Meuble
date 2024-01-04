@@ -3,28 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.formule;
+package controller.insert;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.FormuleQuantite;
-import model.Materiau;
+import model.Meuble;
 
 /**
  *
  * @author HERINIAINA
  */
-@WebServlet(name = "RechercherFormuleServlet", urlPatterns = {"/RechercherFormule"})
-public class RechercherFormuleServlet extends HttpServlet {
+@WebServlet(name = "InsertMeubleServlet", urlPatterns = {"/InsertMeuble"})
+public class InsertMeubleServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,15 +35,16 @@ public class RechercherFormuleServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String idMateriau = request.getParameter("materiau");
-            Materiau materiau = new Materiau(idMateriau);
-            List<FormuleQuantite> formules = materiau.findMeuble(null);
-            request.setAttribute("liste", formules);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/resultat.jsp");
-            dispat.forward(request, response);
+            String idCategorie = request.getParameter("categorie");
+            String idTaille = request.getParameter("taille");
+            String idStyle = request.getParameter("style");
+            Meuble meuble = new Meuble(idCategorie,idTaille,idStyle);
+            meuble.save(null);
+            response.sendRedirect("index.jsp");
         } catch (Exception ex) {
-            Logger.getLogger(RechercherFormuleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertMeubleServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
