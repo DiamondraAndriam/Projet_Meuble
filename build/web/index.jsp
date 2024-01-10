@@ -24,7 +24,9 @@
         <p><a href="SetStyleMateriaux">Ajouter Matériau pour Style</a></p>
         <p><a href="DetailsStyle">Materiau pour un style</a></p>
         <br>
-        
+        <p><a href="PrixMateriau">Update prix matériau</a></p>
+        <br>
         <p><a href="Rechercher">Rechercher Meuble par matériau</a></p>
+        <p><a href="RecherchePrixMeuble">Rechercher Meuble par prix</a></p>
     </body> 
 </html>

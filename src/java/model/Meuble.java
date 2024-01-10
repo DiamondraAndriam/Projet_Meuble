@@ -23,6 +23,7 @@ public class Meuble {
     private Categorie categorie;
     private List<Materiau> liste;
     private List<FormuleQuantite> formules;
+    private double prix;
 
     public Meuble(String idMeuble) {
         setId(Integer.parseInt(idMeuble));
@@ -86,6 +87,14 @@ public class Meuble {
 
     public void setFormules(List<FormuleQuantite> formules) {
         this.formules = formules;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
     }
     
     public Meuble(){}
@@ -216,4 +225,54 @@ public class Meuble {
             }
         } 
     }
+    
+    public static List<Meuble> getBetween(Connection c, String max, String min) throws Exception{
+        try{
+            double maxDouble = Double.parseDouble(max);
+            double minDouble = Double.parseDouble(min);
+            if(minDouble>=maxDouble){
+                throw new Exception("Erreur min et max");
+            }
+            return findByPrix(c, maxDouble, minDouble);
+        } catch(NumberFormatException n){
+            throw new Exception("Erreur format de nombre");
+        }
+    }
+    
+    public static List<Meuble> findByPrix(Connection c, double max, double min) throws Exception{
+        boolean newConnection = false;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            if(c == null) {
+                c = util.Util.pgConnect();
+                newConnection = true;
+            }
+            statement = c.prepareStatement("select * from v_prix_meuble where prix >= ? and prix <= ?");
+            statement.setDouble(2, max);
+            statement.setDouble(1, min);
+            rs = statement.executeQuery();
+            List<Meuble> li = new ArrayList<>();
+            while(rs.next()) {
+                Meuble meuble = new Meuble();
+                meuble.setNom(rs.getString("nom_taille")+" "+rs.getString("nom_categorie")+" "+rs.getString("nom_style"));
+                meuble.setPrix(rs.getDouble("prix"));
+                li.add(meuble);
+            }
+            return li;
+        } catch (Exception e) {
+            throw new Exception("Erreur select");
+        } finally {
+            if(statement != null) {
+                statement.close();
+            }
+            if(rs != null) {
+                rs.close();
+            }
+            if(c != null && newConnection == true) {
+                c.close();
+            }
+        }
+    }
+ 
 }

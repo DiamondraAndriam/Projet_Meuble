@@ -18,6 +18,7 @@ public class Materiau {
 
     private int id;
     private String nom;
+    private double prix;
 
     public Materiau(int parseInt) {
         setId(parseInt);
@@ -43,6 +44,16 @@ public class Materiau {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) throws Exception {
+        if(prix<0)
+            throw new Exception("Erreur: prix négatif");
+        this.prix = prix;
     }
     
     public void save(Connection c) throws Exception {
@@ -137,6 +148,44 @@ public class Materiau {
             if(c != null && newConnection == true) {
                 c.close();
             }
+        }
+    }
+    
+    public void updatePrix(Connection c) throws Exception{
+        boolean newConnection = false;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            if(c == null) {
+                c = util.Util.pgConnect();
+                newConnection = true;
+            }
+            String sql = "UPDATE materiau set prix = ? where id_materiau = ?";
+            statement = c.prepareStatement(sql);
+            statement.setDouble(1, this.getPrix());
+            statement.setInt(2, this.getId());
+            statement.executeUpdate();
+        } catch(Exception e){
+            throw e;
+        } finally {
+            if(statement != null) {
+                statement.close();
+            }
+            if(rs != null) {
+                rs.close();
+            }
+            if(c != null && newConnection == true) {
+                c.close();
+            }
+        }
+    }
+
+    public void setPrix(String prix) throws Exception{
+        try{
+            double prixDouble = Double.parseDouble(prix);
+            setPrix(prixDouble);
+        }catch(NumberFormatException e){
+            throw new Exception("Erreur: Valeur de prix");
         }
     }
 
