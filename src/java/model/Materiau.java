@@ -189,4 +189,32 @@ public class Materiau {
         }
     }
 
+    public void saveLast(Connection c) throws Exception {
+        boolean newConnection = false;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            if(c == null) {
+                c = util.Util.pgConnect();
+                newConnection = true;
+            }
+            String sql = "Insert into historique_prix_materiau(id_materiau,prix) values (?,?)";
+            statement = c.prepareStatement(sql);
+            statement.setDouble(2, this.getPrix());
+            statement.setInt(1, this.getId());
+            statement.executeUpdate();
+        } catch(Exception e){
+            throw e;
+        } finally {
+            if(statement != null) {
+                statement.close();
+            }
+            if(rs != null) {
+                rs.close();
+            }
+            if(c != null && newConnection == true) {
+                c.close();
+            }
+        }
+    }
 }

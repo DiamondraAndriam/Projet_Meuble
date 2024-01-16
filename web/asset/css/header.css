@@ -1,0 +1,42 @@
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffaa64;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.menu{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(5, 100px);
+    height: 50px;
+    text-align: center;
+}
+
+.logo{
+    margin-left: 30px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu-btn{
+    text-decoration: none;
+    /*color: #f8bd8d;*/
+    background: none;
+    text-align: center;
+    height: 33px;
+    align-self: center;
+    padding-top: 7px;
+    justify-content: center;
+}
+.menu-btn:hover{
+    background: #833f1f;
+    color: #ececec;
+}
+
+

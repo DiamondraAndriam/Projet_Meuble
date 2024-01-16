@@ -1,0 +1,177 @@
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container{
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+}
+
+.left-menu{
+    background-color: #f7e3d4;
+    width: 100%;
+    padding: 20px;
+}
+
+.cont-btn{
+    display: grid;
+    grid-template-rows: repeat(auto-fill,50px);
+}
+
+.h3{
+    margin-left: 0;
+    margin-right: auto;
+    color: #262626;
+}
+
+.left-btn{
+    border: none;
+    background: none;
+    text-align: left;
+    margin-left: 30px;
+    font-size: medium;
+    height: 30px;
+    color: #464646;
+}
+.left-btn:hover{
+    color: #262626;
+    background-color: #ffaa64;
+    cursor: pointer;
+}
+.elements{
+    margin: 20px 20px 0px 60px;
+}
+
+.elements h1{
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+.elements table{
+    margin-top: 30px;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    border:solid 1px #ffffff; 
+}
+
+.elements th{
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #ffaa64;
+}
+.elements td{
+    height: 30px;
+    font-size: 14px;
+    border-bottom: solid #fffdfd;
+}
+
+.elements #resume{
+    border: solid #fffdfd;
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+    font-size: 14px;
+}
+.elements #resume p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.elements .select select{
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.elements .select button{
+    margin-top: 10px;
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    font-size: 18px;
+    background-color: #ffaa64;
+}
+
+.elements .table select{
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.elements .table button{
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #ffaa64;
+}
+
+.elements .table input{
+    width: 200px;
+    height: 30px;
+    border: none;
+}
+.elements .table .checkbox{
+    width: 20px;
+}
+
+.elements td button{
+    height: 30px;
+    width: 200px;
+    font-size: 14px;
+}
+
+.elements *{
+    text-align: center;
+    align-items: center;
+}
+
+input{
+    font-size: 16px;
+    height: 30px;
+    width: 200px;
+    margin: 10px 10px 10px 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+}
+
+select{
+    font-size: 14px;
+    height: 30px;
+    width: 200px;
+    margin: 10px 10px 10px 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+}
+
+option{
+    font-size: 14px;
+    height: 30px;
+    width: 200px;
+    margin: 10px 10px 10px 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.submit{
+    font-size: 16px;
+    height: 40px;
+    width: 200px;
+    margin: 10px 10px 10px 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffaa64;
+    border: none;
+    border-radius: 10px;
+}
+
+.submit:hover{
+    background-color: #833f1f;
+    color: #fffdfd;
+}

@@ -38,6 +38,7 @@ public class UpdatePrixMateriauServlet extends HttpServlet {
             String prix = request.getParameter("prix");
             Materiau materiau = new Materiau(idMateriau);
             materiau.setPrix(prix);
+            materiau.saveLast(null);
             materiau.updatePrix(null);
             response.sendRedirect("index.jsp");
         } catch (Exception ex) {

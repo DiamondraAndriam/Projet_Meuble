@@ -37,7 +37,7 @@ public class RechercherServlet extends HttpServlet {
         try{
             List<Materiau> liste = Materiau.findAll(null);
             request.setAttribute("materiau", liste);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/recherche.jsp");
+            RequestDispatcher dispat = request.getRequestDispatcher("index.jsp?page=formule/recherche.jsp");
             dispat.forward(request, response);
         } catch(Exception e){
             e.printStackTrace(response.getWriter());

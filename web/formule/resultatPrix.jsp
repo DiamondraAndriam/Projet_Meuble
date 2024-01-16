@@ -32,7 +32,5 @@
             </table>
             <%}%>
         </div>
-        <p><a href="formule/rechercheMeuble.jsp">Rechercher d'autre meuble</a></p>
-        <a href="index.jsp">Home</a>
     </body>
 </html>

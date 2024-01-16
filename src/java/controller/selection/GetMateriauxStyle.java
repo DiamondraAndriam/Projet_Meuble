@@ -42,7 +42,7 @@ public class GetMateriauxStyle extends HttpServlet {
             List<Materiau> liste = style.selectMateriau(null);
             request.setAttribute("style", style);
             request.setAttribute("materiaux",liste);
-            RequestDispatcher dispatch = request.getRequestDispatcher("selection/materiauxStyle.jsp");
+            RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp?page=selection/materiauxStyle.jsp");
             dispatch.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(GetMateriauxStyle.class.getName()).log(Level.SEVERE, null, ex);

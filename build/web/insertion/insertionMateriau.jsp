@@ -15,7 +15,7 @@
         <h1>Insertion matériau</h1>
         <form action="<%=request.getContextPath()%>/InsertMateriau" method="post">
             Nom: <input type="text" name="nom"><br>
-            <input type="submit" value="Valider">
+            <button class="submit">OK</button>
         </form>
     </body>
 </html>

@@ -43,7 +43,7 @@ public class SetStyleMateriauxServlet extends HttpServlet {
             List<Style> style = Style.findAll(null);
             request.setAttribute("styles", style);
             request.setAttribute("materiaux",liste);
-            RequestDispatcher dispatch = request.getRequestDispatcher("insertion/insertStyleMateriau.jsp");
+            RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp?page=insertion/insertStyleMateriau.jsp");
             dispatch.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(SetStyleMateriauxServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -18,7 +18,7 @@
                 <label>Nom</label>
                 <input type="text" name="nom">
             </div>
-            <input type="submit" value="OK">
+            <button class="submit">OK</button>
         </form>
     </body>
 </html>

@@ -26,7 +26,7 @@
                 <input type="number" name=<%out.print(mat.getId());%>>
             </div>
             <% } %>
-            <input type="submit" value="OK">
+            <button class="submit">OK</button>
         </form>
     </body>
 </html>

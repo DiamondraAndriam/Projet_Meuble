@@ -42,7 +42,7 @@ public class RechercherFormuleServlet extends HttpServlet {
             Materiau materiau = new Materiau(idMateriau);
             List<FormuleQuantite> formules = materiau.findMeuble(null);
             request.setAttribute("liste", formules);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/resultat.jsp");
+            RequestDispatcher dispat = request.getRequestDispatcher("index.jsp?page=formule/resultat.jsp");
             dispat.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(RechercherFormuleServlet.class.getName()).log(Level.SEVERE, null, ex);

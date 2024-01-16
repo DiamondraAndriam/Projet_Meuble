@@ -44,7 +44,7 @@ public class AjoutMeubleServlet extends HttpServlet {
             request.setAttribute("categories", categories);
             request.setAttribute("styles", styles);
             request.setAttribute("tailles", tailles);
-            RequestDispatcher dispatch = request.getRequestDispatcher("insertion/ajoutMeuble.jsp");
+            RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp?page=insertion/ajoutMeuble.jsp");
             dispatch.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(AjoutMeubleServlet.class.getName()).log(Level.SEVERE, null, ex);

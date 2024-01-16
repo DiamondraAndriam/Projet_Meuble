@@ -29,7 +29,7 @@
                 <label>Prix</label>
                 <input type="number" name="prix">
             </div>
-            <input type="submit" value="OK">
+            <button class="submit">OK</button>
         </form>
     </body>
 </html>

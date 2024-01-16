@@ -6,10 +6,7 @@
 package controller.prix;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,12 +38,12 @@ public class RecherchePrixMeubleServlet extends HttpServlet {
             String min = request.getParameter("min");
             List<Meuble> liste = Meuble.getBetween(null, max, min);
             request.setAttribute("meubles", liste);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/resultatPrix.jsp");
+            RequestDispatcher dispat = request.getRequestDispatcher("index.jsp?page=formule/resultatPrix.jsp");
             dispat.forward(request, response);
         } catch (Exception ex) {
             String error = ex.getMessage();
             request.setAttribute("erreur",error);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/rechercheMeuble.jsp");
+            RequestDispatcher dispat = request.getRequestDispatcher("index.jsp?page=formule/rechercheMeuble.jsp");
             dispat.forward(request, response);
         }
     }

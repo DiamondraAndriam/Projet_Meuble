@@ -6,7 +6,6 @@
 package controller.prix;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +38,7 @@ public class PrixMateriauServlet extends HttpServlet {
         try {
             List<Materiau> materiau = Materiau.findAll(null);
             request.setAttribute("materiaux", materiau);
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/ajoutPrix.jsp");
+            RequestDispatcher dispat = request.getRequestDispatcher("index.jsp?page=formule/ajoutPrix.jsp");
             dispat.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(PrixMateriauServlet.class.getName()).log(Level.SEVERE, null, ex);

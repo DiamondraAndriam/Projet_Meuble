@@ -47,7 +47,7 @@
                     <% } %>
                 </select>
             </div>
-            <input type="submit" value="OK">
+                <button class="submit">OK</button>
         </form>
     </body>
 </html>

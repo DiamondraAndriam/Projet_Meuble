@@ -38,7 +38,7 @@ public class DetailsStyleServlet extends HttpServlet {
             List<Style> liste = Style.findAll(null);
             request.setAttribute("style", liste);
             System.out.println(liste.size());
-            RequestDispatcher dispatch = request.getRequestDispatcher("selection/getMateriau.jsp");
+            RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp?page=selection/getMateriau.jsp");
             dispatch.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(DetailsStyleServlet.class.getName()).log(Level.SEVERE, null, ex);

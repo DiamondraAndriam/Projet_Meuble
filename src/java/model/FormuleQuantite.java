@@ -16,7 +16,7 @@ import util.Util;
 public class FormuleQuantite {
     private Meuble meuble;
     private Materiau materiau;
-    private double quantite;
+    private int quantite;
 
     public Meuble getMeuble() {
         return meuble;
@@ -34,16 +34,16 @@ public class FormuleQuantite {
         this.materiau = materiau;
     }
 
-    public double getQuantite() {
+    public int getQuantite() {
         return quantite;
     }
 
-    public void setQuantite(double quantite) {
+    public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
     
     public void setQuantite(String quantite){
-        this.setQuantite(Double.parseDouble(quantite));
+        this.setQuantite(Integer.parseInt(quantite));
     }
     
     public void save(Connection connection) throws Exception{

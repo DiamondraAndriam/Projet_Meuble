@@ -23,7 +23,7 @@
                 <label>Montant min</label>
                 <input type="numeric" name="min">
             </div>
-            <input type="submit"value="Rechercher">
+            <button class="submit">Rechercher</button>
         </form>
         <br>
     </body>

@@ -22,7 +22,7 @@
                 <option value="<% out.print(meuble.getId()); %>"><% out.print(meuble.getNom()); %></option>
                 <% } %>
             </select>
-            <input type="submit" value="Suivant">
+            <button class="submit">OK</button>
         </form>
     </body>
 </html>

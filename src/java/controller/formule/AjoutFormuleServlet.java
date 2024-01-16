@@ -44,7 +44,7 @@ public class AjoutFormuleServlet extends HttpServlet {
             request.setAttribute("meuble",meuble);
             request.setAttribute("materiaux",materiaux);
             
-            RequestDispatcher dispat = request.getRequestDispatcher("formule/formuleDetail.jsp");
+            RequestDispatcher dispat = request.getRequestDispatcher("index.jsp?page=formule/formuleDetail.jsp");
             dispat.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(AjoutFormuleServlet.class.getName()).log(Level.SEVERE, null, ex);

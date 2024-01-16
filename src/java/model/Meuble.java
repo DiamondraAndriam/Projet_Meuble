@@ -274,5 +274,41 @@ public class Meuble {
             }
         }
     }
+
+    List<FormuleQuantite> getFormules(Connection connection) throws Exception {
+        List<FormuleQuantite> liste = new ArrayList<>();
+        boolean newConnection = false;
+        PreparedStatement statement = null;
+        ResultSet result = null;
+        try{
+            if(connection == null){
+                connection = Util.pgConnect();
+                newConnection = true;
+            }
+            statement = connection.prepareStatement("Select * from fab_meuble_materiau where id_meuble =?");
+            statement.setInt(1, id);
+            result= statement.executeQuery();
+            while(result.next()){
+                FormuleQuantite model = new FormuleQuantite();
+                model.setMeuble(this);
+                model.setMateriau(new Materiau(result.getInt("id_materiau")));
+                model.setQuantite(result.getInt("quantite"));
+                liste.add(model);
+            }
+            return liste;
+        } catch(Exception e){
+            throw new Exception("Erreur de sélection: Ne peut pas avoir tous les éléments de [Model]");
+        } finally{
+            if(result != null){
+                result.close();
+            }
+            if(statement != null){
+                statement.close();
+            }
+            if(connection != null && newConnection == true){
+                connection.close();
+            }
+        }
+    }
  
 }

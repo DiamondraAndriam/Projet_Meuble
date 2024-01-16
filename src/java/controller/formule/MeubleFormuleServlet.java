@@ -39,7 +39,7 @@ public class MeubleFormuleServlet extends HttpServlet {
         try {
             List<Meuble> liste = Meuble.findAll(null);
             request.setAttribute("liste", liste);
-            RequestDispatcher dispatch = request.getRequestDispatcher("formule/formuleFabrication.jsp");
+            RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp?page=formule/formuleFabrication.jsp");
             dispatch.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(MeubleFormuleServlet.class.getName()).log(Level.SEVERE, null, ex);

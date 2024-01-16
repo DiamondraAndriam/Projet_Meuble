@@ -28,7 +28,7 @@
                     <% } %>
                 </select>
             </div>
-            <input type="submit" value="Rechercher">
+            <button class="submit">Rechercher</button>
         </form>
         <br>
         

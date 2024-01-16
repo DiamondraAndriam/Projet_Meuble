@@ -15,7 +15,7 @@
         <h1>Insertion style</h1>
         <form action="<%=request.getContextPath()%>/InsertStyle" method="post">
             Nom: <input type="text" name="nom"><br>
-            <input type="submit" value="Valider">
+            <button class="submit">OK</button>
         </form>
     </body>
 </html>

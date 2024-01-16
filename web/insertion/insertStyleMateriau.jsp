@@ -27,7 +27,7 @@
             <%for (Materiau materiau : liste) { %>
             <input type="checkbox" value="<%out.print(materiau.getId());%>" name="materiau"> <%out.print(materiau.getNom());%><br/> 
             <% } %>
-            <input type="submit" value="OK">
+            <button class="submit">OK</button>
         </form>
     </body>
 </html>

@@ -1,0 +1,60 @@
+html{
+    background-image: url('../img/Index.jpg');
+    background-position: fixed;
+    background-position-y: top;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* CONTAINER */
+
+.container{
+    display: grid;
+    grid-template-columns: 60% 35%;
+    margin-top: 100px;
+}
+
+.right{
+    align-items: center;
+    justify-content: center;
+}
+
+.top-cont{
+    display: grid;
+    grid-template-rows: 120px 200px 20px;
+    align-items: center;
+    text-align: end;
+}
+
+.h1{
+    line-height: 105px;
+    font-size: 100px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.btn-list{
+    display: grid;
+    justify-content: end;
+    margin-left: auto;
+    margin-right: 90px;
+}
+
+.btn-right{
+    border: none;
+    background: #ffaa64;
+    padding: 10px 20px 10px 20px;
+    /*color: #ffffff;*/
+    font-size: medium;
+    width: 200px;
+    margin-top: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+p{
+    width: max-content;
+    margin-left: auto;
+    margin-right: 25px;
+    text-align: center;
+}
