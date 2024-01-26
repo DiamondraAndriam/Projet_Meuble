@@ -35,8 +35,10 @@ public class InsertTailleServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String nom = request.getParameter("nom");
+        String niveau = request.getParameter("niveau");
         Taille taille = new Taille();
         taille.setNom(nom);
+        taille.setNiveau(niveau);
         try {
             taille.save(null);
             response.sendRedirect("index.jsp");

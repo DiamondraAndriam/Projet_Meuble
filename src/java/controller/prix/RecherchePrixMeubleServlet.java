@@ -36,7 +36,7 @@ public class RecherchePrixMeubleServlet extends HttpServlet {
         try {
             String max = request.getParameter("max");
             String min = request.getParameter("min");
-            List<Meuble> liste = Meuble.getBetween(null, max, min);
+            List<Meuble> liste = Meuble.getFabBetween(null, max, min);
             request.setAttribute("meubles", liste);
             RequestDispatcher dispat = request.getRequestDispatcher("index.jsp?page=formule/resultatPrix.jsp");
             dispat.forward(request, response);

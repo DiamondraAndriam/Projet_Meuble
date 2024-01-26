@@ -14,7 +14,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Liste de [Model]</h1>
-        
+        <h1>Liste de Model</h1>
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
     </body>
 </html>

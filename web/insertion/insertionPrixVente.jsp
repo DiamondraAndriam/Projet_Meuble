@@ -3,8 +3,9 @@
     Created on : 16 janv. 2024, 15:55:53
     Author     : nyanj
 --%>
-<%@page import="modele.Meuble" %>
-<% List<Meuble> meubles = request.getAttribute(""); %>
+<%@page import="java.util.List"%>
+<%@page import="model.Meuble" %>
+<% List<Meuble> meubles = (List<Meuble>) request.getAttribute(""); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,7 @@
     </head>
     <body>
         <h1>Insertion Prix de vente</h1>
-        <form method="" action="">
+        <form method="InsertPrixVenteMeuble" action="post">
             <div>
                 <label>Meuble</label>
                 <select name="meuble">

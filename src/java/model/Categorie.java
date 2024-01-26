@@ -16,8 +16,10 @@ import java.util.List;
  * @author nyanj
  */
 public class Categorie {
+
     private int id;
     private String nom;
+    private int contraiteHeure;
 
     public Categorie(int id, String nom) {
         setId(id);
@@ -29,6 +31,14 @@ public class Categorie {
 
     public Categorie(String idCategorie) {
         this.setId(Integer.parseInt(idCategorie));
+    }
+
+    public int getContraiteHeure() {
+        return contraiteHeure;
+    }
+
+    public void setContraiteHeure(int contraiteHeure) {
+        this.contraiteHeure = contraiteHeure;
     }
 
     public int getId() {
@@ -79,14 +89,14 @@ public class Categorie {
                 c = util.Util.pgConnect();
                 newConnection = true;
             }
-            statement = c.prepareStatement("select * from Categorie");
+            statement = c.prepareStatement("select * from Categorie order by niveau");
             rs = statement.executeQuery();
             List<Categorie> li = new ArrayList<>();
             while(rs.next()) {
-                Categorie Categorie = new Categorie();
-                Categorie.setId(rs.getInt("id_categorie"));
-                Categorie.setNom(rs.getString("nom"));
-                li.add(Categorie);
+                Categorie categorie = new Categorie();
+                categorie.setId(rs.getInt("id_categorie"));
+                categorie.setNom(rs.getString("nom"));
+                li.add(categorie);
             }
             return li;
         } catch (SQLException e) {
@@ -103,4 +113,37 @@ public class Categorie {
             }
         }
     }
+
+    public void setId(String categorie) {
+        setId(Integer.parseInt(categorie));
+    }
+
+    public void setContraiteHeure(String heure) {
+        setContraiteHeure(Integer.parseInt(heure));
+    }
+
+    public void saveContrainte(Connection c) throws Exception{
+        boolean newConnection = false;
+        PreparedStatement statement = null;
+        try {
+            if(c == null) {
+                c = util.Util.pgConnect();
+                newConnection = true;
+            }
+            statement = c.prepareStatement("Insert into contrainte_categorie (id_categorie, heure) values (?, ?)");
+            statement.setInt(1, this.getId());
+            statement.setInt(2, this.getContraiteHeure());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if(statement != null) {
+                statement.close();
+            }
+            if(c != null && newConnection == true) {
+                c.close();
+            }
+        }
+    }
+    
 }

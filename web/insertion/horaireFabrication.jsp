@@ -3,8 +3,9 @@
     Created on : 16 janv. 2024, 15:31:34
     Author     : nyanj
 --%>
-<%@page import="modele.Categorie"%>
-<%List<Categorie> categories = request.getAtrribute("");%>
+<%@page import="java.util.List"%>
+<%@page import="model.Categorie"%>
+<%List<Categorie> categories = (List<Categorie>) request.getAttribute("cat");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -6,8 +6,9 @@
 			<column name="id_materiau" type="integer" jt="4" mandatory="y" />
 			<column name="quantite" type="integer" jt="4" mandatory="y" />
 			<column name="date_achat" type="date" jt="91" mandatory="y" >
-				<defo>current_date</defo>
+				<defo>CURRENT_DATE</defo>
 			</column>
+			<column name="id_fournisseur" type="integer" jt="4" />
 			<index name="pk_achat_materiau_id_stock_materiau" unique="PRIMARY_KEY" >
 				<column name="id_achat_materiau" />
 			</index>
@@ -16,6 +17,26 @@
 			</constraint>
 			<fk name="fk_achat_materiau_materiau" to_schema="public" to_table="materiau" >
 				<fk_column name="id_materiau" pk="id_materiau" />
+			</fk>
+			<fk name="fk_achat_materiau_fournisseur" to_schema="public" to_table="fournisseur" >
+				<fk_column name="id_fournisseur" pk="id_fournisseur" />
+			</fk>
+		</table>
+		<table name="besoin_employe" >
+			<column name="id_besoin_employe" type="serial" jt="4" />
+			<column name="id_meuble" type="integer" jt="4" mandatory="y" />
+			<column name="id_employe" type="integer" jt="4" mandatory="y" />
+			<column name="nb" type="integer" jt="4" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<column name="heure" type="float8" length="17" decimal="17" jt="6" >
+				<defo>1</defo>
+			</column>
+			<fk name="fk_besoin_employe_meuble" to_schema="public" to_table="meuble" >
+				<fk_column name="id_meuble" pk="id_meuble" />
+			</fk>
+			<fk name="fk_besoin_employe_employe" to_schema="public" to_table="poste" >
+				<fk_column name="id_employe" pk="id_poste" />
 			</fk>
 		</table>
 		<table name="categorie" >
@@ -27,10 +48,21 @@
 				<column name="id_categorie" />
 			</index>
 		</table>
+		<table name="client" >
+			<column name="id_client" type="serial" jt="4" mandatory="y" />
+			<column name="nom" type="varchar" length="30" jt="12" mandatory="y" />
+			<column name="prenom" type="varchar" length="30" jt="12" />
+			<column name="genre" type="integer" jt="4" mandatory="y" >
+				<defo>0</defo>
+			</column>
+			<index name="pk_client_id_client" unique="PRIMARY_KEY" >
+				<column name="id_client" />
+			</index>
+		</table>
 		<table name="contrainte_categorie" >
 			<column name="id_contrainte_categories" type="serial" jt="4" mandatory="y" />
 			<column name="id_categorie" type="integer" jt="4" mandatory="y" />
-			<column name="heure" type="double precision" jt="3" mandatory="y" >
+			<column name="heure" type="float8" length="17" decimal="17" jt="6" mandatory="y" >
 				<defo>1</defo>
 			</column>
 			<index name="pk_contrainte_categorie_id_contrainte_categories" unique="PRIMARY_KEY" >
@@ -53,13 +85,28 @@
 				<fk_column name="id_taille" pk="id_taille" />
 			</fk>
 		</table>
-		<table name="employe" >
-			<column name="id_employe" type="serial" jt="4" mandatory="y" />
-			<column name="type" type="varchar" length="30" jt="12" />
-			<column name="taux_horaire" type="double precision" jt="3" />
-			<index name="pk_employe_id_employe" unique="PRIMARY_KEY" >
-				<column name="id_employe" />
+		<table name="experience" >
+			<column name="id_experience" type="serial" jt="4" mandatory="y" />
+			<column name="min_anciennete" type="integer" jt="4" mandatory="y" >
+				<defo>0</defo>
+			</column>
+			<column name="max_anciennete" type="integer" jt="4" mandatory="y" >
+				<defo>47</defo>
+			</column>
+			<column name="multiplicateur" type="integer" jt="4" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<column name="id_poste" type="integer" jt="4" mandatory="y" />
+			<column name="niveau" type="integer" jt="4" mandatory="y" >
+				<defo>0</defo>
+			</column>
+			<column name="profil" type="varchar" length="20" jt="12" mandatory="y" />
+			<index name="pk_experience_id_experience" unique="PRIMARY_KEY" >
+				<column name="id_experience" />
 			</index>
+			<fk name="fk_experience_poste" to_schema="public" to_table="poste" >
+				<fk_column name="id_poste" pk="id_poste" />
+			</fk>
 		</table>
 		<table name="fab_meuble_materiau" >
 			<column name="id_fab" type="integer" length="10" decimal="0" jt="4" mandatory="y" >
@@ -83,7 +130,7 @@
 			<column name="id_meuble" type="integer" jt="4" mandatory="y" />
 			<column name="nombre" type="integer" jt="4" mandatory="y" />
 			<column name="date_fabrication" type="date" jt="91" mandatory="y" >
-				<defo>current_date</defo>
+				<defo>CURRENT_DATE</defo>
 			</column>
 			<index name="pk_fabrication_id_fabrication" unique="PRIMARY_KEY" >
 				<column name="id_fabrication" />
@@ -91,6 +138,14 @@
 			<fk name="fk_fabrication_meuble" to_schema="public" to_table="meuble" >
 				<fk_column name="id_meuble" pk="id_meuble" />
 			</fk>
+		</table>
+		<table name="fournisseur" >
+			<column name="id_fournisseur" type="serial" jt="4" mandatory="y" />
+			<column name="nom_fournisseur" type="varchar" length="50" jt="12" mandatory="y" />
+			<column name="adresse" type="varchar" length="100" jt="12" />
+			<index name="pk_fournisseur_id_fournisseur" unique="PRIMARY_KEY" >
+				<column name="id_fournisseur" />
+			</index>
 		</table>
 		<table name="historique_prix_materiau" >
 			<column name="id_historique" type="serial" jt="4" mandatory="y" />
@@ -108,9 +163,9 @@
 		</table>
 		<table name="historique_prix_vente" >
 			<column name="id_historique_prix_vente" type="serial" jt="4" mandatory="y" />
-			<column name="prix_vente" type="double precision" jt="3" mandatory="y" />
-			<column name="date_debut" type="date" jt="91" mandatory="y" >
-				<defo>current_date</defo>
+			<column name="prix_vente" type="float8" length="17" decimal="17" jt="6" mandatory="y" />
+			<column name="date_prix" type="date" jt="91" mandatory="y" >
+				<defo>CURRENT_DATE</defo>
 			</column>
 			<column name="id_meuble" type="integer" jt="4" mandatory="y" />
 			<index name="pk_historique_prix_vente_id_historique_prix_vente" unique="PRIMARY_KEY" >
@@ -150,6 +205,7 @@
 			<column name="id_style" type="integer" jt="4" mandatory="y" />
 			<column name="id_taille" type="integer" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="nom_meuble" type="varchar" length="30" jt="12" />
+			<column name="prix_vente" type="double precision" jt="3" />
 			<index name="pk_meuble_id_meuble" unique="PRIMARY_KEY" >
 				<column name="id_meuble" />
 			</index>
@@ -163,6 +219,31 @@
 				<fk_column name="id_taille" pk="id_taille" />
 			</fk>
 		</table>
+		<table name="personnel" >
+			<column name="id_personnel" type="serial" jt="4" mandatory="y" />
+			<column name="nom" type="varchar" length="50" jt="12" />
+			<column name="prenom" type="varchar" length="50" jt="12" mandatory="y" />
+			<column name="date_naissance" type="date" jt="91" mandatory="y" />
+			<column name="date_embauche" type="date" jt="91" mandatory="y" />
+			<column name="id_poste" type="integer" jt="4" mandatory="y" />
+			<index name="pk_personnel_id_personnel" unique="PRIMARY_KEY" >
+				<column name="id_personnel" />
+			</index>
+			<constraint name="cns_personnel" >
+				<string>extract(year from date_naissance) - extract(year from now())&gt;18</string>
+			</constraint>
+			<fk name="fk_personnel_personnel" to_schema="public" to_table="poste" >
+				<fk_column name="id_poste" pk="id_poste" />
+			</fk>
+		</table>
+		<table name="poste" >
+			<column name="id_poste" type="serial" jt="4" mandatory="y" />
+			<column name="type" type="varchar" length="30" jt="12" />
+			<column name="taux_horaire" type="double precision" jt="3" />
+			<index name="pk_employe_id_employe" unique="PRIMARY_KEY" >
+				<column name="id_poste" />
+			</index>
+		</table>
 		<table name="stock_materiau" >
 			<column name="id_stock" type="serial" jt="4" mandatory="y" />
 			<column name="id_materiau" type="integer" jt="4" mandatory="y" />
@@ -175,6 +256,20 @@
 			</index>
 			<fk name="fk_stock_materiau_materiau" to_schema="public" to_table="materiau" >
 				<fk_column name="id_materiau" pk="id_materiau" />
+			</fk>
+		</table>
+		<table name="stock_meuble" >
+			<column name="id_stock_meuble" type="serial" jt="4" mandatory="y" />
+			<column name="id_meuble" type="integer" jt="4" mandatory="y" />
+			<column name="quantite" type="integer" jt="4" mandatory="y" />
+			<column name="date_stock" type="date" jt="91" mandatory="y" >
+				<defo>current_date</defo>
+			</column>
+			<index name="pk_stock_meuble_id_stock_meuble" unique="PRIMARY_KEY" >
+				<column name="id_stock_meuble" />
+			</index>
+			<fk name="fk_stock_meuble_meuble" to_schema="public" to_table="meuble" >
+				<fk_column name="id_meuble" pk="id_meuble" />
 			</fk>
 		</table>
 		<table name="style" >
@@ -207,10 +302,54 @@
 				<type_extra>GENERATED BY DEFAULT AS IDENTITY</type_extra>
 			</column>
 			<column name="nom_taille" type="varchar" length="10" decimal="0" jt="12" mandatory="y" />
+			<column name="niveau" type="integer" jt="4" mandatory="y" />
 			<index name="pk_taille_id_taille" unique="PRIMARY_KEY" >
 				<column name="id_taille" />
 			</index>
+			<index name="cns_taille" unique="UNIQUE" >
+				<column name="niveau" />
+			</index>
 		</table>
+		<table name="vente" >
+			<column name="id_vente" type="serial" jt="4" mandatory="y" />
+			<column name="id_client" type="integer" jt="4" mandatory="y" />
+			<column name="id_meuble" type="integer" jt="4" mandatory="y" />
+			<column name="nombre" type="integer" jt="4" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<column name="date" type="date" jt="91" mandatory="y" >
+				<defo>current_date</defo>
+			</column>
+			<index name="pk_vente_id_vente" unique="PRIMARY_KEY" >
+				<column name="id_vente" />
+			</index>
+			<fk name="fk_vente_client" to_schema="public" to_table="client" >
+				<fk_column name="id_client" pk="id_client" />
+			</fk>
+			<fk name="fk_vente_meuble" to_schema="public" to_table="meuble" >
+				<fk_column name="id_meuble" pk="id_meuble" />
+			</fk>
+		</table>
+		<view name="v_benefice" >
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT v_prix_meuble.*, prix_vente, charge_rh, prix_vente-(charge_rh + prix_fabrication) as benefice FROM v_prix_meuble
+join meuble on meuble.id_meuble = v_prix_meuble.id_meuble
+join v_charge_rh on v_charge_rh.id_meuble = v_prix_meuble.id_meuble]]></view_script>
+			<column name="id_meuble" type="integer" />
+			<column name="nom_style" type="varchar" />
+			<column name="nom_categorie" type="varchar" />
+			<column name="nom_taille" type="varchar" />
+			<column name="prix_fabrication" type="float8" />
+			<column name="prix_vente" type="float8" />
+			<column name="charge_rh" type="float8" />
+			<column name="benefice" type="float8" />
+		</view>
+		<view name="v_charge_rh" >
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT sum(nb*heure*taux_horaire) as charge_rh, id_meuble FROM besoin_employe
+join employe on employe.id_employe = besoin_employe.id_employe
+group by id_meuble]]></view_script>
+			<column name="charge_rh" type="float8" />
+			<column name="id_meuble" type="integer" />
+		</view>
 		<view name="v_contrainte" >
 			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT id_taille, id_categorie, nb_emp, heure FROM contrainte_taille, contrainte_categorie;]]></view_script>
 			<column name="id_taille" type="integer" />
@@ -278,14 +417,48 @@ join v_fab_meuble_materiau on v_stock_materiau.id_materiau = v_fab_meuble_materi
 			<column name="nom_taille" type="varchar" />
 			<column name="id_taille" type="integer" />
 		</view>
+		<view name="v_personnel" >
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT id_personnel, nom, prenom, extract(year from now())-extract(year from date_embauche) as anciennete, id_poste FROM personnel]]></view_script>
+			<column name="id_personnel" type="integer" />
+			<column name="nom" type="varchar" />
+			<column name="prenom" type="varchar" />
+			<column name="anciennete" type="float8" />
+			<column name="id_poste" type="integer" />
+		</view>
 		<view name="v_prix_meuble" >
-			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT id_meuble,nom_style,nom_categorie,nom_taille,sum(prix) as prix FROM v_fab_meuble_materiau_prix
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT id_meuble,nom_style,nom_categorie,nom_taille, sum(prix) as prix_fabrication FROM v_fab_meuble_materiau_prix
 GROUP BY id_meuble,nom_style,nom_categorie,nom_taille]]></view_script>
 			<column name="id_meuble" type="integer" />
 			<column name="nom_style" type="varchar" />
 			<column name="nom_categorie" type="varchar" />
 			<column name="nom_taille" type="varchar" />
-			<column name="prix" type="float8" />
+			<column name="prix_fabrication" type="float8" />
+		</view>
+		<view name="v_profil" >
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT v_personnel.*, id_experience, multiplicateur, profil FROM v_personnel
+join experience on experience.id_poste = v_personnel.id_poste
+where anciennete < max_anciennete and anciennete >= min_anciennete]]></view_script>
+			<column name="id_personnel" type="integer" />
+			<column name="nom" type="varchar" />
+			<column name="prenom" type="varchar" />
+			<column name="anciennete" type="float8" />
+			<column name="id_poste" type="integer" />
+			<column name="id_experience" type="integer" />
+			<column name="multiplicateur" type="integer" />
+			<column name="profil" type="varchar" />
+		</view>
+		<view name="v_profil_employe" >
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT v_profil.*, multiplicateur*taux_horaire as salaire FROM v_profil
+join poste on poste.id_poste = v_profil.id_poste]]></view_script>
+			<column name="id_personnel" type="integer" />
+			<column name="nom" type="varchar" />
+			<column name="prenom" type="varchar" />
+			<column name="anciennete" type="float8" />
+			<column name="id_poste" type="integer" />
+			<column name="id_experience" type="integer" />
+			<column name="multiplicateur" type="integer" />
+			<column name="profil" type="varchar" />
+			<column name="salaire" type="float8" />
 		</view>
 		<view name="v_stock" >
 			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT id_materiau, sum(quantite) as quantite FROM stock_materiau
@@ -300,6 +473,15 @@ join materiau on materiau.id_materiau = v_stock.id_materiau]]></view_script>
 			<column name="nom" type="varchar" />
 			<column name="prix" type="float8" />
 			<column name="quantite" type="bigint" />
+		</view>
+		<view name="v_stock_meuble" >
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT stock_meuble.*, nom_meuble FROM stock_meuble
+join meuble on meuble.id_meuble = stock_meuble.id_meuble]]></view_script>
+			<column name="id_stock_meuble" type="integer" />
+			<column name="id_meuble" type="integer" />
+			<column name="quantite" type="integer" />
+			<column name="date_stock" type="date" />
+			<column name="nom_meuble" type="varchar" />
 		</view>
 		<view name="v_style_materiau" >
 			<view_script><![CDATA[ SELECT materiau.nom AS nom_materiau,
@@ -316,43 +498,107 @@ join materiau on materiau.id_materiau = v_stock.id_materiau]]></view_script>
 			<column name="id_style" type="integer" />
 			<column name="id_style_materiau" type="integer" />
 		</view>
+		<view name="v_vente" >
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT genre, sum(nombre) as total, id_meuble FROM vente
+join client on client.id_client = vente.id_client
+group by genre, id_meuble]]></view_script>
+			<column name="genre" type="integer" />
+			<column name="total" type="bigint" />
+			<column name="id_meuble" type="integer" />
+		</view>
+		<view name="v_vente_total" >
+			<view_script><![CDATA[CREATE VIEW ${name} AS SELECT genre, sum(total) as total FROM v_vente group by genre]]></view_script>
+			<column name="genre" type="integer" />
+			<column name="total" type="numeric" />
+		</view>
+		<sequence name="achat_materiau_id_stock_materiau_seq" options="START WITH 1" />
+		<sequence name="besoin_employe_id_besoin_employe_seq" options="START WITH 1" />
 		<sequence name="categorie_id_seq" options="START WITH 1" />
+		<sequence name="contrainte_categorie_id_contrainte_categories_seq" options="START WITH 1" />
+		<sequence name="contrainte_taille_id_contrainte_taille_seq" options="START WITH 1" />
+		<sequence name="employe_id_employe_seq" options="START WITH 1" />
 		<sequence name="fab_meuble_materiau_id_fab_seq" options="START WITH 1" />
+		<sequence name="fabrication_id_fabrication_seq" options="START WITH 1" />
 		<sequence name="historique_prix_materiau_id_historique_seq" options="START WITH 1" />
+		<sequence name="historique_prix_vente_id_historique_prix_vente_seq" options="START WITH 1" />
 		<sequence name="materiau_id_seq" options="START WITH 1" />
 		<sequence name="materiau_meuble_id_materiau_meuble_seq" options="START WITH 1" />
 		<sequence name="meuble_id_meuble_seq" options="START WITH 1" />
+		<sequence name="stock_materiau_id_stock_seq" options="START WITH 1" />
 		<sequence name="style_id_seq" options="START WITH 1" />
 		<sequence name="style_materiau_id_style_materiau_seq" options="START WITH 1" />
 		<sequence name="taille_id_taille_seq" options="START WITH 1" />
 	</schema>
 	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.8.jar" driver_desc="Standard" host="localhost" port="5432" instance="meuble" user="meuble" passwd="bWV1Ymxl" />
 	<layout name="Default Layout" id="Layout_59660a9" show_relation="columns" >
-		<entity schema="public" name="style_materiau" color="BED3F4" x="320" y="240" />
-		<entity schema="public" name="v_style_materiau" color="3986C1" x="320" y="656" />
-		<entity schema="public" name="materiau_meuble" color="C1D8EE" x="320" y="544" />
-		<entity schema="public" name="style" color="BED3F4" x="576" y="240" />
+		<entity schema="public" name="style_materiau" color="BED3F4" x="320" y="272" />
+		<entity schema="public" name="materiau" color="BED3F4" x="320" y="448" />
+		<entity schema="public" name="historique_prix_materiau" color="3986C1" x="64" y="256" />
+		<entity schema="public" name="stock_materiau" color="C1D8EE" x="48" y="416" />
+		<entity schema="public" name="v_fab_meuble_materiau_prix" color="FFFFCC" x="688" y="1088" />
+		<entity schema="public" name="style" color="BED3F4" x="544" y="272" />
+		<entity schema="public" name="meuble" color="FFB3B3" x="544" y="384" />
+		<entity schema="public" name="v_fab_meuble_materiau" color="FFFFCC" x="688" y="928" />
+		<entity schema="public" name="v_prix_meuble" color="FFCC99" x="1152" y="1040" />
+		<entity schema="public" name="v_charge_rh" color="FFCC99" x="1152" y="928" />
+		<entity schema="public" name="poste" color="C1D8EE" x="1168" y="336" />
+		<entity schema="public" name="experience" color="C1D8EE" x="1168" y="128" />
+		<entity schema="public" name="v_personnel" color="FFFF99" x="1536" y="96" />
+		<entity schema="public" name="fournisseur" color="C1D8EE" x="64" y="752" />
+		<entity schema="public" name="achat_materiau" color="C1D8EE" x="48" y="576" />
+		<entity schema="public" name="fabrication" color="C1D8EE" x="752" y="560" />
+		<entity schema="public" name="v_stock_meuble" color="3986C1" x="480" y="1120" />
+		<entity schema="public" name="v_meuble" color="3986C1" x="480" y="928" />
+		<entity schema="public" name="v_profil" color="FFFF99" x="1696" y="96" />
+		<entity schema="public" name="contrainte_taille" color="C1D8EE" x="960" y="256" />
 		<entity schema="public" name="taille" color="3986C1" x="784" y="240" />
-		<entity schema="public" name="v_meuble" color="3986C1" x="560" y="656" />
-		<entity schema="public" name="materiau" color="BED3F4" x="320" y="416" />
-		<entity schema="public" name="v_fab_meuble_materiau" color="3986C1" x="736" y="656" />
-		<entity schema="public" name="fab_meuble_materiau" color="3986C1" x="560" y="528" />
-		<entity schema="public" name="v_stock_materiau" color="3986C1" x="320" y="800" />
-		<entity schema="public" name="v_fab_meuble_materiau_prix" color="3986C1" x="736" y="832" />
-		<entity schema="public" name="v_fab_meuble_stock_materiau" color="3986C1" x="928" y="816" />
-		<entity schema="public" name="v_prix_meuble" color="3986C1" x="928" y="656" />
-		<entity schema="public" name="fabrication" color="C1D8EE" x="768" y="496" />
-		<entity schema="public" name="contrainte_taille" color="C1D8EE" x="960" y="240" />
-		<entity schema="public" name="v_contrainte" color="3986C1" x="976" y="496" />
-		<entity schema="public" name="historique_prix_materiau" color="3986C1" x="64" y="224" />
-		<entity schema="public" name="stock_materiau" color="C1D8EE" x="48" y="384" />
-		<entity schema="public" name="achat_materiau" color="C1D8EE" x="48" y="544" />
-		<entity schema="public" name="v_stock" color="3986C1" x="48" y="688" />
-		<entity schema="public" name="employe" color="C1D8EE" x="1232" y="240" />
-		<entity schema="public" name="categorie" color="3986C1" x="784" y="368" />
-		<entity schema="public" name="contrainte_categorie" color="C1D8EE" x="960" y="368" />
-		<entity schema="public" name="meuble" color="FFB3B3" x="576" y="368" />
-		<entity schema="public" name="historique_prix_vente" color="C1D8EE" x="784" y="48" />
+		<entity schema="public" name="personnel" color="C1D8EE" x="1344" y="320" />
+		<entity schema="public" name="v_contrainte" color="FFFF99" x="1536" y="320" />
+		<entity schema="public" name="v_benefice" color="FFCC99" x="1312" y="928" />
+		<entity schema="public" name="fab_meuble_materiau" color="3986C1" x="448" y="576" />
+		<entity schema="public" name="materiau_meuble" color="C1D8EE" x="432" y="720" />
+		<entity schema="public" name="stock_meuble" color="C1D8EE" x="912" y="560" />
+		<entity schema="public" name="besoin_employe" color="C1D8EE" x="1168" y="480" />
+		<entity schema="public" name="categorie" color="3986C1" x="768" y="368" />
+		<entity schema="public" name="contrainte_categorie" color="C1D8EE" x="944" y="368" />
+		<entity schema="public" name="historique_prix_vente" color="C1D8EE" x="752" y="688" />
+		<entity schema="public" name="v_fab_meuble_stock_materiau" color="FFFFCC" x="880" y="1008" />
+		<entity schema="public" name="v_style_materiau" color="CCFFCC" x="224" y="976" />
+		<entity schema="public" name="v_stock_materiau" color="CCFFCC" x="224" y="1120" />
+		<entity schema="public" name="v_stock" color="CCFFCC" x="80" y="976" />
+		<entity schema="public" name="v_profil_employe" color="3986C1" x="1856" y="80" />
+		<entity schema="public" name="client" color="C1D8EE" x="1408" y="512" />
+		<entity schema="public" name="vente" color="C1D8EE" x="1568" y="512" />
+		<entity schema="public" name="v_vente_total" color="3986C1" x="1840" y="512" />
+		<entity schema="public" name="v_vente" color="B3E6E6" x="1712" y="512" />
+		<group name="formule &amp; fabrication" color="FFFFCC" >
+			<entity schema="public" name="v_fab_meuble_materiau_prix" />
+			<entity schema="public" name="v_fab_meuble_stock_materiau" />
+			<entity schema="public" name="v_fab_meuble_materiau" />
+		</group>
+		<group name="matériau" color="CCFFCC" >
+			<entity schema="public" name="v_style_materiau" />
+			<entity schema="public" name="v_stock_materiau" />
+			<entity schema="public" name="v_stock" />
+		</group>
+		<group name="prix" color="FFCCCC" >
+			<entity schema="public" name="v_prix_meuble" />
+			<entity schema="public" name="v_charge_rh" />
+			<entity schema="public" name="v_benefice" />
+		</group>
+		<group name="meuble" color="FFCCFF" >
+			<entity schema="public" name="v_meuble" />
+			<entity schema="public" name="v_stock_meuble" />
+		</group>
+		<group name="v_employe" color="FFFF99" >
+			<entity schema="public" name="v_profil" />
+			<entity schema="public" name="v_personnel" />
+			<entity schema="public" name="v_profil_employe" />
+		</group>
+		<group name="vente" color="B3E6E6" >
+			<entity schema="public" name="v_vente" />
+			<entity schema="public" name="v_vente_total" />
+		</group>
 		<script name="fabrication" id="Editor_44546ea" language="SQL" >
 			<string><![CDATA[INSERT INTO "public".fabrication
 	( id_fabrication, id_meuble, nombre, date_fabrication) VALUES ( ?, ?, ?, ? );]]></string>

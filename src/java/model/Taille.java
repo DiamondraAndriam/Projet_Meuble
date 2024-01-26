@@ -16,8 +16,23 @@ import java.util.List;
  * @author HERINIAINA
  */
 public class Taille {
+
     private int id;
     private String nom;
+    private int niveau;
+
+    public int getNiveau() {
+        return niveau;
+    }
+
+    public void setNiveau(int niveau) {
+        this.niveau = niveau;
+    }
+    
+    public void setNiveau(String niveau) {
+        setNiveau(Integer.parseInt(niveau));
+    }
+    private int contrainteNombre;
 
     public Taille(int id, String nom) {
         setId(id);
@@ -26,8 +41,16 @@ public class Taille {
 
     public Taille(){}
 
-    Taille(String idTaille) {
+    public Taille(String idTaille) {
         this.setId(Integer.parseInt(idTaille));
+    }
+
+    public int getContrainteNombre() {
+        return contrainteNombre;
+    }
+
+    public void setContrainteNombre(int contrainteNombre) {
+        this.contrainteNombre = contrainteNombre;
     }
     
     public int getId() {
@@ -54,8 +77,9 @@ public class Taille {
                 c = util.Util.pgConnect();
                 newConnection = true;
             }
-            statement = c.prepareStatement("Insert into Taille (nom_taille) values (?)");
+            statement = c.prepareStatement("Insert into Taille (nom_taille, niveau) values (?,?)");
             statement.setString(1, this.getNom());
+            statement.setInt(1, this.getNiveau());
             statement.executeUpdate();
         } catch (Exception e) {
             throw e;
@@ -103,5 +127,36 @@ public class Taille {
         }
     }
     
-    
+    public static Taille findMin(Connection c) throws Exception {
+        boolean newConnection = false;
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            if(c == null) {
+                c = util.Util.pgConnect();
+                newConnection = true;
+            }
+            statement = c.prepareStatement("select * from Taille order by niveau asc limit 1");
+            rs = statement.executeQuery();
+            while(rs.next()) {
+                Taille taille = new Taille();
+                taille.setId(rs.getInt("id_taille"));
+                taille.setNom(rs.getString("nom_taille"));
+                return taille;
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if(statement != null) {
+                statement.close();
+            }
+            if(rs != null) {
+                rs.close();
+            }
+            if(c != null && newConnection == true) {
+                c.close();
+            }
+        }
+        return null;
+    }
 }

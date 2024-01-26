@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Fiche [Model]</h1>
+        <h1>Fiche Model</h1>
         Nom: <% out.print(model.getNom());%><br/>
         Détails: <% out.print(model.getDetails());%><br/>
         <a href="">Modifier</a> <a href="">Supprimer</a>

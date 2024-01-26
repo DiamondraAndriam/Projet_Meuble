@@ -68,7 +68,7 @@ public class Model {
                 connection = Util.pgConnect();
                 newConnection = true;
             }
-            statement = connection.prepareStatement("Select * from [Model] where id = ?");
+            statement = connection.prepareStatement("Select * from Model where id = ?");
             statement.setInt(1, this.getId());
             result= statement.executeQuery();
             while(result.next()){
@@ -77,7 +77,7 @@ public class Model {
             }
         } catch(Exception e){
             e.printStackTrace();
-            throw new Exception("Erreur de sélection: ne peut pas trouver le [model] avec cet id");
+            throw new Exception("Erreur de sélection: ne peut pas trouver le model avec cet id");
         } finally{
             if(result != null){
                 result.close();
@@ -103,7 +103,7 @@ public class Model {
                 connection = Util.pgConnect();
                 newConnection = true;
             }
-            statement = connection.prepareStatement("Select * from [Model]");
+            statement = connection.prepareStatement("Select * from Model");
             result= statement.executeQuery();
             while(result.next()){
                 Model model = new Model();
@@ -114,7 +114,7 @@ public class Model {
             }
             return liste;
         } catch(Exception e){
-            throw new Exception("Erreur de sélection: Ne peut pas avoir tous les éléments de [Model]");
+            throw new Exception("Erreur de sélection: Ne peut pas avoir tous les éléments de Model");
         } finally{
             if(result != null){
                 result.close();
@@ -136,7 +136,7 @@ public class Model {
                 connection = Util.pgConnect();
                 newConnection = true;
             }
-            statement = connection.prepareStatement("Insert into [Model](id,nom,details) values(?,?,?)");
+            statement = connection.prepareStatement("Insert into Model(id,nom,details) values(?,?,?)");
             statement.setInt(1, this.getId());
             statement.setString(2, this.getNom());
             statement.setString(3, this.getDetails());
@@ -161,7 +161,7 @@ public class Model {
                 connection = Util.pgConnect();
                 newConnection = true;
             }
-            statement = connection.prepareStatement("Update [Model] set nom = ? , details = ? where id = ?");
+            statement = connection.prepareStatement("Update Model set nom = ? , details = ? where id = ?");
             statement.setInt(1, this.getId());
             statement.setString(2, this.getNom());
             statement.setString(3, this.getDetails());
@@ -188,7 +188,7 @@ public class Model {
                 connection = Util.pgConnect();
                 newConnection = true;
             }
-            statement = connection.prepareStatement("Select * from Facture order by id desc limit 1");
+            statement = connection.prepareStatement("Select * from Model order by id desc limit 1");
             result= statement.executeQuery();
             while(result.next()){
                 model.setId(result.getInt("id"));

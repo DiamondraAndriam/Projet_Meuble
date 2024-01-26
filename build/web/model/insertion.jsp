@@ -13,7 +13,7 @@
     </head>
     <body>
         <form action="post" method="insertModel">
-            <h1>Insertion [Model]</h1>
+            <h1>Insertion Model</h1>
             Nom: <input type="text" name="nom"><br/>
             Détails: <input type="text" name="details"><br/>
             <input type="submit" value="Ajouter">
